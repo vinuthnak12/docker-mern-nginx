@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bezkoder-ui
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bezkoder-ui
+  template:
+    metadata:
+      labels:
+        app: bezkoder-ui
+    spec:
+      containers:
+        - name: ui
+          image: vinuthnakoganti/frontend:v1  # Replace with your Docker Hub image
+          ports:
+            - containerPort: 80
+          env:
+            - name: REACT_APP_API_BASE_URL
+              value: http://bezkoder-api-service:8080/api
